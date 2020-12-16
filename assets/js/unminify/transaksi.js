@@ -12,10 +12,34 @@ function reloadTable() {
 }
 
 function nota(jumlah) {
+
+ getSelectedRow = function(val)
+    {
+        db.transaction(function(transaction) {
+              transaction.executeSql('SELECT MAX(id) FROM transaksi',[], selectedRowValues, errorHandler);
+
+        });
+    };
+    selectedRowValues = function(transaction,results)
+    {
+         for(var i = 0; i < results.rows.length; i++)
+         {
+             var row = results.rows.item(i);
+             alert(row['number']);
+             alert(row['name']);                 
+         }
+    };
+    var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm  + dd + yyyy;
     let hasil = "",
-        char = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        char = "0123456789",
         total = char.length;
-    for (var r = 0; r < jumlah; r++) hasil += char.charAt(Math.floor(Math.random() * total));
+    hasil = "ABC" + today + '-' + Math.floor(Math.random() * 1000);
+        // for (var r = 0; r < jumlah; r++) hasil += char.charAt(Math.floor(Math.random() * total));
     return hasil
 }
 
@@ -152,6 +176,7 @@ function add() {
             total_bayar: $("#total").html(),
             jumlah_uang: $('[name="jumlah_uang"]').val(),
             diskon: $('[name="diskon"]').val(),
+            no_meja: $('[name="no_meja"]').val(),
             pelanggan: $("#pelanggan").val(),
             nota: $("#nota").html()
         },

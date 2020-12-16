@@ -31,6 +31,7 @@ class Transaksi extends CI_Controller {
 					'jumlah_uang' => $transaksi->jumlah_uang,
 					'diskon' => $transaksi->diskon,
 					'pelanggan' => $transaksi->pelanggan,
+					'no_meja' => $transaksi->no_meja,
 					'action' => '<a class="btn btn-sm btn-success" href="'.site_url('transaksi/cetak/').$transaksi->id.'">Print</a> <button class="btn btn-sm btn-danger" onclick="remove('.$transaksi->id.')">Delete</button>'
 				);
 			}
@@ -61,6 +62,7 @@ class Transaksi extends CI_Controller {
 			'jumlah_uang' => $this->input->post('jumlah_uang'),
 			'diskon' => $this->input->post('diskon'),
 			'pelanggan' => $this->input->post('pelanggan'),
+			'no_meja' => $this->input->post('no_meja'),
 			'nota' => $this->input->post('nota'),
 			'kasir' => $this->session->userdata('id')
 		);
@@ -100,6 +102,7 @@ class Transaksi extends CI_Controller {
 			'produk' => $dataProduk,
 			'total' => $produk->total_bayar,
 			'bayar' => $produk->jumlah_uang,
+			'no_meja' => $produk->no_meja,
 			'kembalian' => $produk->jumlah_uang - $produk->total_bayar,
 			'kasir' => $produk->kasir
 		);

@@ -25,7 +25,7 @@ let laporan_penjualan = $("#laporan_penjualan").DataTable( {
             data: "jumlah_uang"
         }
         , {
-            data: "diskon"
+            data: "no_meja"
         }
         , {
             data: "pelanggan"

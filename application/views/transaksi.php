@@ -123,6 +123,10 @@
         <input placeholder="Jumlah Uang" type="number" class="form-control" name="jumlah_uang" onkeyup="kembalian()" required>
       </div>
       <div class="form-group">
+        <label>No Meja</label>
+        <input placeholder="No Meja" type="text" class="form-control" name="no_meja" required>
+      </div>
+      <div class="form-group">
         <label>Diskon</label>
         <input placeholder="Diskon" type="number" class="form-control" onkeyup="kembalian()" name="diskon">
       </div>

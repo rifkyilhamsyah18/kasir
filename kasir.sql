@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 21, 2020 at 02:48 PM
--- Server version: 10.4.12-MariaDB
--- PHP Version: 7.4.2
+-- Host: 127.0.0.1
+-- Generation Time: Dec 16, 2020 at 09:11 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `kasir`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `books`
+--
+
+CREATE TABLE `books` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `books`
+--
+
+INSERT INTO `books` (`id`, `title`, `author`, `created_at`, `updated_at`) VALUES
+(1, 'Codeigniter Rest API', 'Momo Baruno', '2015-12-26 09:17:14', '2015-12-26 09:17:14');
 
 -- --------------------------------------------------------
 
@@ -38,8 +58,8 @@ CREATE TABLE `kategori_produk` (
 --
 
 INSERT INTO `kategori_produk` (`id`, `kategori`) VALUES
-(1, 'Tekhnologi'),
-(2, 'Kebutuhan');
+(2, 'Makanan'),
+(3, 'Minuman');
 
 -- --------------------------------------------------------
 
@@ -60,8 +80,7 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`id`, `nama`, `jenis_kelamin`, `alamat`, `telepon`) VALUES
-(1, 'Adam', 'Pria', 'Seoul', '081237483291'),
-(2, 'Rahma', 'Wanita', 'Banjarnegara', '085463728374');
+(3, 'Muhammad RIfky Ilhamsyah', 'Pria', 'Jl Bunisari', '081388986698');
 
 -- --------------------------------------------------------
 
@@ -83,7 +102,8 @@ CREATE TABLE `pengguna` (
 
 INSERT INTO `pengguna` (`id`, `username`, `password`, `nama`, `role`) VALUES
 (1, 'admin', '$2y$10$/I7laWi1mlNFxYSv54EUPOH8MuZhmRWxhE.LaddTK9TSmVe.IHP2C', 'Admin', '1'),
-(2, 'ibrahimalanshor', '$2y$10$5thNuizSyAdrGXC9A/WYd.StNiSRUy0eBZJ401hGBfUpwGINu9kyG', 'Ibrahim Al Anshor', '2');
+(2, 'ibrahimalanshor', '$2y$10$5thNuizSyAdrGXC9A/WYd.StNiSRUy0eBZJ401hGBfUpwGINu9kyG', 'Ibrahim Al Anshor', '2'),
+(3, 'rifky', '$2y$10$PebkLrTQIZPAM9wo/F1jKOUWVhN38dzf5v/nl9dxHGmp5H5H3XFu2', 'Rifky', '2');
 
 -- --------------------------------------------------------
 
@@ -107,8 +127,9 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `barcode`, `nama_produk`, `kategori`, `satuan`, `harga`, `stok`, `terjual`) VALUES
-(1, 'PULS ALPRB', 'Voucher Pulsa 50000', 1, 2, '55000', 4, '2'),
-(2, 'DJRM SPER', 'Djarum Super 12', 2, 1, '18000', 15, '5');
+(3, 'NSGRNG', 'Nasi Goreng', 2, 4, '25000', 5, '1'),
+(4, 'MNMICELMN', 'Ice Lemon', 3, 4, '12500', 1, '3'),
+(5, 'MIXSEAFOOD', 'Mix Seafood - Kepiting - Kerang ', 2, 5, '3000000', 3, '1');
 
 -- --------------------------------------------------------
 
@@ -126,8 +147,8 @@ CREATE TABLE `satuan_produk` (
 --
 
 INSERT INTO `satuan_produk` (`id`, `satuan`) VALUES
-(1, 'Bungkus'),
-(2, 'Voucher');
+(4, '1'),
+(5, 'paket');
 
 -- --------------------------------------------------------
 
@@ -172,7 +193,10 @@ CREATE TABLE `stok_masuk` (
 INSERT INTO `stok_masuk` (`id`, `tanggal`, `barcode`, `jumlah`, `keterangan`, `supplier`) VALUES
 (1, '2020-02-21 13:41:25', 1, '10', 'penambahan', NULL),
 (2, '2020-02-21 13:41:40', 2, '20', 'penambahan', 1),
-(3, '2020-02-21 13:42:23', 1, '10', 'penambahan', 2);
+(3, '2020-02-21 13:42:23', 1, '10', 'penambahan', 2),
+(4, '2020-12-15 13:01:19', 3, '10', 'penambahan', 2),
+(5, '2020-12-15 13:01:37', 5, '10', 'penambahan', 2),
+(6, '2020-12-15 13:01:47', 4, '10', 'penambahan', 2);
 
 -- --------------------------------------------------------
 
@@ -193,8 +217,7 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id`, `nama`, `alamat`, `telepon`, `keterangan`) VALUES
-(1, 'Tulus', 'Banjarnegara', '083321128832', 'Aktif'),
-(2, 'Nur', 'Cilacap', '082235542637', 'Baru');
+(1, 'RifkyIlhamsyah', 'Bandung', '083321128832', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -213,7 +236,7 @@ CREATE TABLE `toko` (
 --
 
 INSERT INTO `toko` (`id`, `nama`, `alamat`) VALUES
-(1, 'Toko Tum', 'Jln Raya Klesem Selatan No 1E Wanadadi, Banjarnegara, Indonesia');
+(1, 'Hulwa Toko', 'Bandung');
 
 -- --------------------------------------------------------
 
@@ -231,23 +254,26 @@ CREATE TABLE `transaksi` (
   `diskon` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `pelanggan` int(11) DEFAULT NULL,
   `nota` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kasir` int(11) NOT NULL
+  `kasir` int(11) NOT NULL,
+  `no_meja` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id`, `tanggal`, `barcode`, `qty`, `total_bayar`, `jumlah_uang`, `diskon`, `pelanggan`, `nota`, `kasir`) VALUES
-(1, '2020-02-21 13:42:54', '1', '2', '110000', '120000', '', 0, '7OROKLOEZ4041IQ', 1),
-(2, '2020-02-21 13:43:25', '2,1', '5,1', '145000', '150000', '1500', 1, 'YKFNJAAKDMI0GC4', 1),
-(3, '2020-02-21 13:43:25', '2,1', '5,1', '145000', '150000', '1500', 1, 'YKFNJAAKDMI0GC4', 1),
-(4, '2020-02-21 13:43:42', '1', '1', '55000', '60000', '', 2, 'GKV673Z3MC4A02V', 1),
-(5, '2020-02-21 13:49:44', '1', '2', '110000', '200000', '10000', 0, '108A992MRZ3PYME', 2);
+INSERT INTO `transaksi` (`id`, `tanggal`, `barcode`, `qty`, `total_bayar`, `jumlah_uang`, `diskon`, `pelanggan`, `nota`, `kasir`, `no_meja`) VALUES
+(15, '2020-12-16 14:46:14', '5', '1', '3000000', '19999900', '2000000', 3, 'ABC12162020-954', 1, '29A');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `kategori_produk`
@@ -314,34 +340,40 @@ ALTER TABLE `transaksi`
 --
 
 --
+-- AUTO_INCREMENT for table `books`
+--
+ALTER TABLE `books`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `kategori_produk`
 --
 ALTER TABLE `kategori_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `satuan_produk`
 --
 ALTER TABLE `satuan_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `stok_keluar`
@@ -353,7 +385,7 @@ ALTER TABLE `stok_keluar`
 -- AUTO_INCREMENT for table `stok_masuk`
 --
 ALTER TABLE `stok_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -371,7 +403,7 @@ ALTER TABLE `toko`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
